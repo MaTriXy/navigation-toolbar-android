@@ -1,5 +1,6 @@
 package com.ramotion.navigationtoolbar
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Rect
 import android.support.v4.view.GestureDetectorCompat
@@ -229,7 +230,7 @@ class HeaderLayout : FrameLayout {
 
         fun recycleView(view: View, cache: Boolean = true) {
             val adapter = adapter ?: throw RuntimeException("No adapter set")
-            val lp = getChildLayoutParams(view) ?: throw RuntimeException("Invalid layout paramsr")
+            val lp = getChildLayoutParams(view) ?: throw RuntimeException("Invalid layout params")
             val holder = lp.viewHolder ?: throw RuntimeException("No view holder")
             adapter.recycleView(holder)
             this@HeaderLayout.removeView(view)
@@ -275,6 +276,7 @@ class HeaderLayout : FrameLayout {
         gestureDetector = GestureDetectorCompat(context, TouchGestureListener())
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun onTouchEvent(event: MotionEvent): Boolean {
         val res = gestureDetector.onTouchEvent(event)
         if (event.action == MotionEvent.ACTION_UP) {
